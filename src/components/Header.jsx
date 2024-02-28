@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import { GrClose } from "react-icons/gr";
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,7 +16,7 @@ const Header = () => {
   const formSubmit = () => {};
 
   return (
-    <div className="bg-primary ml-2 mr-2">
+    <div className="bg-primary ml-2 mr-2 lg:ml-10 lg:mr-10">
       <div className="  mx-auto border-b-2 py-2 flex items-center justify-between">
         <NavLink to={"/"}>
           <span className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-2 py-1 rounded-md text-xl  font-semibold">
@@ -46,6 +47,7 @@ const Header = () => {
           <button
             className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-md px-2 py-1 
          font-semibold text-white"
+            onClick={() => navigate("/sign-in")}
           >
             Sign In
           </button>
