@@ -9,6 +9,7 @@ import DashProfile from "./components/DashProfile";
 import DashComment from "./components/DashComment";
 import DashUser from "./components/DashUser";
 import DashBoard from "./components/DashBoard";
+import PrivateRoute from "./components/PrivateRoute";
 const App = () =>{
 
   return (
@@ -19,12 +20,14 @@ const App = () =>{
           <Route  path='/' element={<Home/>}/>
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/sign-up" element={<SignUp/>} />
+          <Route element={<PrivateRoute/>} >
           <Route path="/dashboard" element={<Dashboard/>}>
               <Route path="profile"  element={<DashProfile/>}/>
               <Route path="comments" element={<DashComment/>} />
               <Route path="posts" element={<DashPosts/>} />
               <Route path ="users" element={<DashUser/>} />
               <Route path="dash" element={<DashBoard/>} /> 
+          </Route>
           </Route>
         </Routes>
     </BrowserRouter>

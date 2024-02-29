@@ -4,6 +4,7 @@ import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLoading, signin } from '../redux/userSlice/user';
+// eslint-disable-next-line react/prop-types
 const OAuth = ({text}) => {
   const auth = getAuth(app);
   const dispatch = useDispatch();

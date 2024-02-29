@@ -63,6 +63,7 @@ const Signin = () => {
           <p className="flex flex-col">
             Your email:
             <input
+            type="text"
               className=" outline-none  bg-gray-200 border-1 rounded-md px-2 py-2"
               placeholder="name@company.com"
               {...register("email",{
@@ -74,6 +75,7 @@ const Signin = () => {
           <p className="flex flex-col">
             Your password:
             <input
+            type="password"
               className=" outline-none  bg-gray-200 border-1 rounded-md px-2 py-2"
               placeholder="******"
               {
