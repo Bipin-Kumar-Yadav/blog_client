@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { setLoading, signin } from "../redux/userSlice/user";
+import { setLoading,signin } from "../redux/userSlice/user";
 import OAuth from "../components/OAuth";
 
 const Signin = () => {
@@ -29,7 +29,8 @@ const Signin = () => {
       if(res.ok){
       const resData = await res.json();
       dispatch(setLoading(false));
-      dispatch(signin(resData));
+      dispatch(signin(resData.user));
+      console.log(resData)
       console.log(loading,currentUser)
       navigate('/');
       reset();
@@ -77,7 +78,6 @@ const Signin = () => {
             <input
             type="password"
               className=" outline-none  bg-gray-200 border-1 rounded-md px-2 py-2"
-              placeholder="******"
               {
                 ...register("password",{
                   required:true

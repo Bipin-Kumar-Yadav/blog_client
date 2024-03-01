@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const [loading,setLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,7 +25,8 @@ const SignUp = () => {
       })
       console.log(res);
       reset();
-      setLoading(false)
+      setLoading(false);
+      navigate('/sign-in')
     } catch (error) {
       console.log("error in frontend while signup")
     }
@@ -76,7 +78,6 @@ const SignUp = () => {
           <input
           type="password"
             className=" outline-none  bg-gray-200 border-1 rounded-md px-2 py-2"
-            placeholder="******"
             {
               ...register("password",{
                 required:true
