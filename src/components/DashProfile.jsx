@@ -10,6 +10,7 @@ const DashProfile = () => {
   const [imageFile ,setImageFile]  = useState(null)
   const [imgFileUrl,setImgFileUrl]  = useState(null);
   const [imgDownloadUrl, setImgDownloadUrl] = useState(null)
+  const [modal,setModal] = useState(false)
   const loading = useSelector((state)=>state.user.loading)
   const fileRef = useRef();
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const DashProfile = () => {
        body : JSON.stringify(data)
      }) 
      const resData = await res.json();
-     console.log(resData.user);
      dispatch(updateUser(resData.user))
      dispatch(setLoading(false));
      reset();
@@ -129,8 +129,31 @@ const DashProfile = () => {
             <button type="submit" className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-md px-2 py-2 mt-3 
          font-semibold text-white">{loading ? "Loading..." : "Update"}</button>
         </form>
-        <p onClick={handleDelete} className=" cursor-pointer text-base md:text-lg mt-3 font-semibold text-red-500">Delete Account</p>
+        <p onClick={()=>{setModal(!modal)}} className=" cursor-pointer text-base md:text-lg mt-3 font-semibold text-red-500">Delete Account</p>
+        {modal && (
+          <div className="top-0 left-0 w-screen h-screen fixed bg-modal backdrop-blur-sm overflow-hidden ">
+            <div className=" fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] 
+             rounded-md shadow-2xl min-w-[300px] bg-primary min-h-[200px] md:min-w-[450px] md:min-h-[300px]
+             flex flex-col justify-around items-center
+            ">
+              <p className="text-2xl font-semibold">Are You Sure ?</p>
+             <div className="flex  w-full justify-around ">
+             <button  className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-md px-2 py-1 
+         font-semibold text-white"
+         onClick={()=>{handleDelete()
+          setModal(!modal)
+         }}
+         >Delete</button>
+              <button  className="bg-gradient-to-r from-orange-500 to-pink-600 rounded-md px-2 py-1 
+         font-semibold text-white"
+          onClick={()=>{setModal(!modal)}}
+         >Cancel</button>
+             </div>
+            </div>
+          </div>
+        )}
     </div>
+    
   )
 }
 

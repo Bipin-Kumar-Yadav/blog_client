@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+    background-color: #CDB2F9;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#container{
+    height: calc(100vh - 64px);
+}
+#home_container{
+    height: 100vh;
+    overflow-y: scroll;
+}
+#outlet_container{
+    height: calc(100vh - 64px);
+    overflow-y: scroll;
+}
+#createPost {
+    height: calc(100vh-64px);
+    overflow-y: hidden;
+}
+#Editor{
+    object-fit: cover;
+}
+.jodit-react-container{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 250px !important;
+    
+}
+.jodit-container{
+    overflow-y: hidden;
+}
+.jodit-workplace{
+    height: 200px !important;
+    overflow-y: scroll !important;
+}
+@media (min-width:768px) {
+    .jodit-react-container{
+        width: 445px !important;
+    }
+}

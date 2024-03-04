@@ -22,6 +22,7 @@ const userSlice = createSlice({
         },
         updateUser : (state,action) => {
             state.currentUser = action.payload
+            localStorage.setItem('user', JSON.stringify(action.payload));
         }
     }
 })

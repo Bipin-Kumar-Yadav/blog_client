@@ -15,8 +15,8 @@ const Header = () => {
   const formSubmit = () => {};
 
   return (
-    <div className="bg-primary ml-2 mr-2 lg:ml-10 lg:mr-10">
-      <div className="  mx-auto border-b-2 py-2 flex items-center justify-between">
+    <div className="h-[64px] w-[95%] z-10 border-b-2 border-b-white ml-2 mr-2 lg:ml-10 lg:mr-10">
+      <div className="  mx-auto py-2 flex items-center justify-between">
 
        {/* icon  */}
         <NavLink to={"/"}>

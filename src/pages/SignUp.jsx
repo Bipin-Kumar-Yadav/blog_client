@@ -23,18 +23,25 @@ const SignUp = () => {
       },
       body: JSON.stringify(data),
       })
-      console.log(res);
-      reset();
       setLoading(false);
-      navigate('/sign-in')
+      reset();
+      if(res.ok){
+        navigate('/sign-in')
+      }
+      else{
+        navigate("/sign-out")
+      }
+      console.log(res);
+      
     } catch (error) {
       console.log("error in frontend while signup")
+      navigate('/sign-out')
     }
   }
 
   return (
-    <div className="bg-primary h-screen mx-auto max-w-3xl flex flex-col md:flex-row  justify-between overflow-y-hidden">
-    <div className="mt-[25%] md:w-[45%] ml-2">
+    <div className="bg-primary  mx-auto max-w-3xl flex flex-col md:flex-row  justify-between ">
+    <div className="mt-5 md:mt-[25%] md:w-[45%] ml-2">
      <div className="flex gap-2 w-fit  mx-auto">
      <span
         className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-2 py-1
@@ -47,7 +54,7 @@ const SignUp = () => {
         This is a demo project. You can sign up with your email and password.
       </p>
     </div>
-    <div className="ml-2 mr-2 h-full mt-[15%] md:w-[45%]">
+    <div className="ml-2 mr-2 h-full mt-2 md:mt-[15%] md:w-[45%]">
       <form onSubmit={handleSubmit(formSubmit)} className="flex flex-col gap-4">
       <p className="flex flex-col">
           Your username:

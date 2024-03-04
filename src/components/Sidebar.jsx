@@ -6,11 +6,12 @@ import { RiArticleFill } from "react-icons/ri";
 import { IoMdArrowForward } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../redux/userSlice/user";
 const Sidebar = () => {
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
+  const currentUser = useSelector((state)=>state.user.currentUser)
   const items = [
     {
       id: "1",
@@ -20,33 +21,50 @@ const Sidebar = () => {
     },
     {
       id: "2",
-      title: "Profile",
-      path: "/dashboard/profile",
-      icon: <IoPersonSharp />,
-    },
-    {
-      id: "3",
       title: "Comments",
       path: "/dashboard/comments",
       icon: <MdOutlineInsertComment />,
     },
     {
-      id: "4",
+      id: "3",
       title: "Users",
       path: "/dashboard/users",
       icon: <PiUsersThreeFill />,
     },
     {
-      id: "5",
+      id: "4",
       title: "Posts",
       path: "/dashboard/posts",
       icon: <RiArticleFill />,
     },
   ];
 
+  const handleSignout = async (e)=>{
+    e.preventDefault();
+  try {
+      const res = await fetch("/api/user/signout",{
+        method: 'POST',
+        headers : {
+          'Content-Type' : 'application/json'
+        }
+      })
+      dispatch(signout())
+      setModal(!modal)
+      console.log(res);
+  } catch (error) {
+    console.log("Frontend error while signing out",error)
+  }
+  }
   return (
-    <div className=" h-screen bg-slate-900 w-fit">
-      {items?.map((item) => (
+    <div className=" bg-slate-900 w-fit" >
+      <NavLink
+          className="text-white flex flex-col md:flex-row items-center text-xl gap-2 pt-2 mx-6"
+          to='/dashboard/profile'
+        >
+          <IoPersonSharp />
+          <p className="text-[8px] md:text-xl">Profile</p>
+        </NavLink>
+      {currentUser.isAdmin && items?.map((item) => (
         <NavLink
           className="text-white flex flex-col md:flex-row items-center text-xl gap-2 pt-2 mx-6"
           key={item.id}
@@ -60,10 +78,10 @@ const Sidebar = () => {
         onClick={() => {
           setModal(!modal);
         }}
-        className="text-white flex flex-col md:flex-row items-center text-xl gap-2 pt-2 mx-6"
+        className=" cursor-pointer text-white flex flex-col md:flex-row items-center text-xl gap-2 pt-2 mx-6"
       >
         <IoMdArrowForward />
-        <p className=" text-[8px] md:text-xl">Sign Out</p>
+        <p className=" cursor-pointer text-[8px] md:text-xl">Sign Out</p>
         
       </div>
       {modal && (
@@ -74,11 +92,9 @@ const Sidebar = () => {
             ">
               <p className="text-2xl font-semibold">Are You Sure ?</p>
              <div className="flex  w-full justify-around ">
-             <button  className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-md px-2 py-1 
+             <button  className=" cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500 rounded-md px-2 py-1 
          font-semibold text-white"
-         onClick={()=>{dispatch(signout())
-          setModal(!modal)
-         }}
+         onClick={handleSignout}
          >Sign Out</button>
               <button  className="bg-gradient-to-r from-orange-500 to-pink-600 rounded-md px-2 py-1 
          font-semibold text-white"
